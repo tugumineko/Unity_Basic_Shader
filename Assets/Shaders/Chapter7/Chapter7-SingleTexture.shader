@@ -61,11 +61,11 @@ Shader "Unity Shaders Book/Chapter 7/Single Texture"{
 			fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));
 
 			//对纹理进行采样，获得 rgb 信息
-			fixed3 albelo = tex2D(_MainTex,i.uv).rgb * _Color.rgb;
+			fixed3 albedo = tex2D(_MainTex,i.uv).rgb * _Color.rgb;
 
-			fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT * albelo;
+			fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT * albedo;
 
-			fixed3 diffuse = albelo * _LightColor0.rgb * saturate(dot(worldNormal,worldLightDir));
+			fixed3 diffuse = albedo * _LightColor0.rgb * saturate(dot(worldNormal,worldLightDir));
 			
 			fixed3 viewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
 

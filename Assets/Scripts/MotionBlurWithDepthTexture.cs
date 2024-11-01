@@ -20,7 +20,7 @@ public class MotionBlurWithDepthTexture : PostEffectsBase
     public float blurSize = 0.5f;
 
     private Camera myCamera;
-    public Camera camera{
+    public Camera cam{
         get{
             if(myCamera == null){
                 myCamera = GetComponent<Camera>();
@@ -33,7 +33,7 @@ public class MotionBlurWithDepthTexture : PostEffectsBase
 
     private void OnEnable()
     {
-        camera.depthTextureMode |= DepthTextureMode.Depth;
+        cam.depthTextureMode |= DepthTextureMode.Depth;
     }
 
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
@@ -42,7 +42,7 @@ public class MotionBlurWithDepthTexture : PostEffectsBase
             material.SetFloat("_BlurSize", blurSize);
 
             material.SetMatrix("_PreviousViewProjectionMatrix", previousViewProjectionMatrix);//表示下一帧的 Previous
-            Matrix4x4 currentViewProjectionMatrix = camera.projectionMatrix * camera.worldToCameraMatrix;
+            Matrix4x4 currentViewProjectionMatrix = cam.projectionMatrix * cam.worldToCameraMatrix;
             Matrix4x4 currentViewProjectionInverseMatrix = currentViewProjectionMatrix.inverse;
             material.SetMatrix("_CurrentViewProjectionInverseMatrix", currentViewProjectionInverseMatrix);
             previousViewProjectionMatrix = currentViewProjectionMatrix;
